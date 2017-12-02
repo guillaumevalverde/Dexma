@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import gve.dexma.exception.MoneyException;
+import gve.dexma.pojo.Coin;
 import gve.dexma.pojo.Euro;
 import gve.dexma.pojo.Product;
 import gve.dexma.vendingmachine.FactoryVendingMachine;
@@ -61,7 +62,7 @@ public class UserUsingVendingMachine extends BaseTest {
         vendingMachine.addMoneyInMachineUserRequest(new Euro(0.2f));
         vendingMachine.addMoneyInMachineUserRequest(new Euro(0.5f));
 
-        Map<Euro, Integer> change = vendingMachine.getChangeUserRequest();
+        Map<Coin, Integer> change = vendingMachine.getChangeUserRequest();
 
         float amountForChange = ToolUtil.calculateAmountFromChange(change);
         assertEquals(0.8, amountForChange, 0.001);
@@ -76,7 +77,7 @@ public class UserUsingVendingMachine extends BaseTest {
 
         System.out.println(vendingMachine.toString());
 
-        Map<Euro, Integer> change = vendingMachine.getChangeUserRequest();
+        Map<Coin, Integer> change = vendingMachine.getChangeUserRequest();
         float moneyInMachineAfter = vendingMachine.calculateAmountInMachineSupplier();
 
         assertEquals(moneyInMachineBefore, moneyInMachineAfter, 0.001);
@@ -112,11 +113,8 @@ public class UserUsingVendingMachine extends BaseTest {
         } catch (MoneyException e) {
             e.printStackTrace();
         }
-        Map<Euro, Integer> change = vendingMachine.getChangeUserRequest();
+        Map<Coin, Integer> change = vendingMachine.getChangeUserRequest();
         float changeAmount = vendingMachine.calculateAmountInMachineSupplier();
         assertEquals(0.3f, ToolUtil.calculateAmountFromChange(change), 0.001);
     }
-
-
-
 }

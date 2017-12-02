@@ -18,11 +18,9 @@ public class SupplierUsingVendingMachine extends BaseTest {
         vendingMachine = new FactoryVendingMachine().getMachineInitialized();
     }
 
-    /**
-     * */
     @Test
     public void addMoneyAndCancel() {
-        vendingMachine.addEuroSupplierRequest(new Euro(2f), 2);
+        vendingMachine.addCoinSupplierRequest(new Euro(2f), 2);
         assertEquals(12, vendingMachine.getCoin(5).getQuantity());
     }
 

@@ -1,13 +1,12 @@
 package gve.dexma.vendingmachine;
 
 import gve.dexma.exception.MoneyException;
+import gve.dexma.pojo.Coin;
 import gve.dexma.pojo.CoinInMachine;
 import gve.dexma.pojo.Euro;
 import gve.dexma.pojo.Product;
 
 import java.util.*;
-
-import static gve.dexma.vendingmachine.ChangeRecursiveAlgo.getChangeRecursive;
 
 public class VendingMachine {
 
@@ -17,15 +16,15 @@ public class VendingMachine {
 
     private int moneyGiven = 0;
 
-    public VendingMachine(Map<Euro, Integer> coinAccepted,
+    public VendingMachine(Map<? extends Coin, Integer> coinAccepted,
                           Map<Product, Integer>  productInMachine) {
         this.productInMachine = productInMachine;
         this.coins = new ArrayList<>();
-        for (Map.Entry<Euro, Integer> coin : coinAccepted.entrySet()) {
-            coins.add(new CoinInMachine(coin.getKey(), coin.getValue()));
+        for (Map.Entry<? extends Coin, Integer> coin : coinAccepted.entrySet()) {
+            coins.add(new CoinInMachine<>(coin.getKey(), coin.getValue()));
         }
-        coins.sort((coin1, coin2) -> coin1.getEuro().getValueForCalcul() < coin2.getEuro().getValueForCalcul()
-                ? -1 : coin1.getEuro().getValueForCalcul() < coin2.getEuro().getValueForCalcul() ? 0 : 1);
+        coins.sort((coin1, coin2) -> coin1.getCoin().getValueForCalcul() < coin2.getCoin().getValueForCalcul()
+                ? -1 : coin1.getCoin().getValueForCalcul() < coin2.getCoin().getValueForCalcul() ? 0 : 1);
     }
 
     public List<CoinInMachine> getCoins() {
@@ -46,9 +45,9 @@ public class VendingMachine {
         productInMachine.put(product, quantity + quantityToAdd);
     }
 
-    public void addEuroSupplierRequest(Euro euro, int num) {
+    public void addCoinSupplierRequest(Coin euro, int num) {
         int index;
-        if ( (index = coins.indexOf(new CoinInMachine(euro, 0))) > -1) {
+        if ( (index = coins.indexOf(new CoinInMachine<>(euro, 0))) > -1) {  //(index = coins.indexOf(new CoinInMachine<>(euro, 0))) > -1) {
             coins.get(index).addQuantity(num);
         }
     }
@@ -65,15 +64,15 @@ public class VendingMachine {
         }
     }
 
-    public Map<Euro,Integer> getChangeUserRequest() {
-        Map<Euro,Integer> change = ChangeRecursiveAlgo.getChangeRecursive(coins, moneyGiven);
+    public Map<Coin,Integer> getChangeUserRequest() {
+        Map<Coin,Integer> change = ChangeRecursiveAlgo.getChangeRecursive(coins, moneyGiven);
         applyChangeOnListCoinInMachine(change);
         return change;
     }
 
     public Euro addMoneyInMachineUserRequest(Euro euro) {
         int index;
-        if ((index = coins.indexOf(new CoinInMachine(euro, 0))) >= 0) {
+        if ((index = coins.indexOf(new CoinInMachine<>(euro, 0))) >= 0) {
             moneyGiven += euro.getValueForCalcul();
             coins.get(index).addQuantity(1);
             return null;
@@ -86,7 +85,7 @@ public class VendingMachine {
         int amount = 0;
         for (CoinInMachine coinInMachine: coins)
         {
-            amount +=  coinInMachine.getQuantity() * coinInMachine.getEuro().getValueForCalcul();
+            amount +=  coinInMachine.getQuantity() * coinInMachine.getCoin().getValueForCalcul();
         }
         return  amount / 100;
     }
@@ -129,10 +128,10 @@ public class VendingMachine {
         return (indexProduct >= 0 && indexProduct < size);
     }
 
-    private void applyChangeOnListCoinInMachine(Map<Euro, Integer> change) {
-        for (Map.Entry<Euro, Integer> coinChange : change.entrySet())
+    private void applyChangeOnListCoinInMachine(Map<Coin, Integer> change) {
+        for (Map.Entry<Coin, Integer> coinChange : change.entrySet())
         {
-            addEuroSupplierRequest(coinChange.getKey(), -coinChange.getValue());
+            addCoinSupplierRequest(coinChange.getKey(), -coinChange.getValue());
         }
     }
 

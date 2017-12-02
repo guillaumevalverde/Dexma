@@ -19,6 +19,8 @@ public abstract class Coin {
 
     protected abstract void checkValuePrecondition(float value);
 
+    public abstract String getType();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -26,7 +28,7 @@ public abstract class Coin {
 
         Coin coin = (Coin) o;
 
-        return value == coin.value;
+        return value == coin.value && getType().contentEquals(coin.getType());
     }
 
     @Override

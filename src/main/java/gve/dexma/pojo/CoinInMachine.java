@@ -1,16 +1,16 @@
 package gve.dexma.pojo;
 
-public class CoinInMachine {
-    private final Euro euro;
+public class CoinInMachine<T extends Coin> {
+    private final T coin;
     private int quantity;
 
-    public CoinInMachine(Euro euro, int quantity) {
-        this.euro = euro;
+    public CoinInMachine(T coin, int quantity) {
+        this.coin = coin;
         this.quantity = quantity;
     }
 
-    public Euro getEuro() {
-        return euro;
+    public T getCoin() {
+        return coin;
     }
 
     public int getQuantity() {
@@ -34,18 +34,18 @@ public class CoinInMachine {
 
         CoinInMachine that = (CoinInMachine) o;
 
-        return euro.equals(that.euro);
+        return coin.equals(that.coin);
     }
 
     @Override
     public int hashCode() {
-        return euro.hashCode();
+        return coin.hashCode();
     }
 
     @Override
     public String toString() {
         return "CoinInMachine(" +
-                "euro=" + euro.getRealValue() +
+                "coin=" + coin.getRealValue() +
                 ", quantity=" + quantity +
                 ')';
     }

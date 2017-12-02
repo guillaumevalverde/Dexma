@@ -1,15 +1,17 @@
-package gve.dexma.pojo;
+package gve.dexma.vendingmachine;
+
+import gve.dexma.pojo.Coin;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Euro extends Coin {
+public class CoinForTest extends Coin {
 
     private static final Set<Integer> coinAccepted =
-            new HashSet<>(Arrays.asList(1, 2, 5, 10, 20, 50, 100, 200));
+            new HashSet<>(Arrays.asList(1, 2, 5, 6, 10, 20, 50, 60, 100, 200, 400, 500, 600, 700, 800, 900, 1000));
 
-    public Euro(float value) {
+    public CoinForTest(float value) {
         super(value);
     }
 
@@ -21,7 +23,7 @@ public class Euro extends Coin {
 
     @Override
     public String getType() {
-        return "€";
+        return "testCoin";
     }
 
 }

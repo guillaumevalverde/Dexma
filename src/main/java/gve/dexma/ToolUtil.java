@@ -1,5 +1,6 @@
 package gve.dexma;
 
+import gve.dexma.pojo.Coin;
 import gve.dexma.pojo.CoinInMachine;
 import gve.dexma.pojo.Euro;
 
@@ -8,12 +9,12 @@ import java.util.Map;
 
 public class ToolUtil {
 
-    public static float calculateAmountFromChange(Map<Euro, Integer> change) {
+    public static float calculateAmountFromChange(Map<? extends Coin, Integer> change) {
         if (change == null) {
             return 0f;
         }
         float amount = 0;
-        for (Map.Entry<Euro, Integer> entry : change.entrySet())
+        for (Map.Entry<? extends Coin, Integer> entry : change.entrySet())
         {
             amount +=  entry.getKey().getValueForCalcul() * entry.getValue();
         }
@@ -37,15 +38,15 @@ public class ToolUtil {
 
     }
 
-    public static String getStringFromChange(Map<Euro, Integer> change) {
+    public static String getStringFromChange(Map<Coin, Integer> change) {
         if (change == null || change.size() == 0) {
             return "No change sorry!!!";
         }
         StringBuilder str = new StringBuilder();
         str.append("\nFrom change:\n");
-        for (Map.Entry<Euro, Integer> entry : change.entrySet())
+        for (Map.Entry<Coin, Integer> entry : change.entrySet())
         {
-            str.append("euros(").append(entry.getKey().getRealValue()).append(", ").append(entry.getValue()).append(")\n");
+            str.append("(").append(entry.getKey().getRealValue()).append(entry.getKey().getType()).append(", ").append(entry.getValue()).append(")\n");
         }
         return str.toString();
     }
