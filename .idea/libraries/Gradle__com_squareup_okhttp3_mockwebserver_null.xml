@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: com.squareup.okhttp3:mockwebserver:null">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Could not find com.squareup.okhttp3:mockwebserver:null.&#10;Searched in the following locations:&#10;    https:/repo1.maven.org/maven2/com/squareup/okhttp3/mockwebserver/null/mockwebserver-null.pom&#10;    https:/repo1.maven.org/maven2/com/squareup/okhttp3/mockwebserver/null/mockwebserver-null.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

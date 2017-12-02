@@ -1,0 +1,30 @@
+group 'gve'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    dependencyVersions = [
+            junit                   : '4.12',
+            mockito                 : '2.8.9',
+            assertJ                 : '3.8.0',
+            rxJava2                 : '2.1.0'
+            ]
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // Unit Testing
+    testImplementation "junit:junit:$dependencyVersions.junit"
+    testImplementation "org.mockito:mockito-core:$dependencyVersions.mockito"
+    testImplementation "org.assertj:assertj-core:$dependencyVersions.assertJ"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$dependencyVersions.okHttp"
+    implementation "io.reactivex.rxjava2:rxjava:$dependencyVersions.rxJava2"
+
+}
