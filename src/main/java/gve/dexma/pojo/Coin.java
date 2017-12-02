@@ -21,6 +21,8 @@ public abstract class Coin {
 
     public abstract String getType();
 
+    public abstract Class getTypeClass();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

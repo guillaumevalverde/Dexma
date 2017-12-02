@@ -26,4 +26,9 @@ public class CoinForTest extends Coin {
         return "testCoin";
     }
 
+    @Override
+    public Class getTypeClass() {
+        return this.getClass();
+    }
+
 }

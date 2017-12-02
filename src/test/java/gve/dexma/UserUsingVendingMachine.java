@@ -24,12 +24,12 @@ public class UserUsingVendingMachine extends BaseTest {
 
     @Test
     public void addMoneyInMachineWithAcceptedEuro() {
-        Euro change1 = vendingMachine.addMoneyInMachineUserRequest(new Euro(0.05f));
-        Euro change2 = vendingMachine.addMoneyInMachineUserRequest(new Euro(0.1f));
-        Euro change3 = vendingMachine.addMoneyInMachineUserRequest(new Euro(0.2f));
-        Euro change4 = vendingMachine.addMoneyInMachineUserRequest(new Euro(0.5f));
-        Euro change5 = vendingMachine.addMoneyInMachineUserRequest(new Euro(1f));
-        Euro change6 = vendingMachine.addMoneyInMachineUserRequest(new Euro(2f));
+        Coin change1 = vendingMachine.addMoneyInMachineUserRequest(new Euro(0.05f));
+        Coin change2 = vendingMachine.addMoneyInMachineUserRequest(new Euro(0.1f));
+        Coin change3 = vendingMachine.addMoneyInMachineUserRequest(new Euro(0.2f));
+        Coin change4 = vendingMachine.addMoneyInMachineUserRequest(new Euro(0.5f));
+        Coin change5 = vendingMachine.addMoneyInMachineUserRequest(new Euro(1f));
+        Coin change6 = vendingMachine.addMoneyInMachineUserRequest(new Euro(2f));
 
         assertTrue(change1 == null);
         assertTrue(change2 == null);
@@ -49,8 +49,8 @@ public class UserUsingVendingMachine extends BaseTest {
     @Test
     public void addMoneyInMachineWithNonAcceptedEuro() {
         //0.01f, 0.02f, 0.05f, 0.1f, 0.2f, 0.5f, 1f, 2f
-        Euro change1 = vendingMachine.addMoneyInMachineUserRequest(new Euro(0.01f));
-        Euro change2 = vendingMachine.addMoneyInMachineUserRequest(new Euro(0.02f));
+        Coin change1 = vendingMachine.addMoneyInMachineUserRequest(new Euro(0.01f));
+        Coin change2 = vendingMachine.addMoneyInMachineUserRequest(new Euro(0.02f));
         assertEquals(new Euro(0.01f), change1);
         assertEquals(new Euro(0.02f), change2);
         assertEquals(0f, vendingMachine.getMoneyGivenSupplier(),0.001);

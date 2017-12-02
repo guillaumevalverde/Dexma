@@ -24,4 +24,9 @@ public class Euro extends Coin {
         return "€";
     }
 
+    @Override
+    public Class getTypeClass() {
+        return this.getClass();
+    }
+
 }

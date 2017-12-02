@@ -3,7 +3,6 @@ package gve.dexma.vendingmachine;
 import gve.dexma.exception.MoneyException;
 import gve.dexma.pojo.Coin;
 import gve.dexma.pojo.CoinInMachine;
-import gve.dexma.pojo.Euro;
 import gve.dexma.pojo.Product;
 
 import java.util.*;
@@ -45,9 +44,10 @@ public class VendingMachine {
         productInMachine.put(product, quantity + quantityToAdd);
     }
 
-    public void addCoinSupplierRequest(Coin euro, int num) {
+    public void addCoinSupplierRequest(Coin coin, int num) {
+        checkTypeOfCoinPrecondition(coin);
         int index;
-        if ( (index = coins.indexOf(new CoinInMachine<>(euro, 0))) > -1) {  //(index = coins.indexOf(new CoinInMachine<>(euro, 0))) > -1) {
+        if ( (index = coins.indexOf(new CoinInMachine<>(coin, 0))) > -1) {
             coins.get(index).addQuantity(num);
         }
     }
@@ -70,14 +70,15 @@ public class VendingMachine {
         return change;
     }
 
-    public Euro addMoneyInMachineUserRequest(Euro euro) {
+    public Coin addMoneyInMachineUserRequest(Coin coin) {
+        checkTypeOfCoinPrecondition(coin);
         int index;
-        if ((index = coins.indexOf(new CoinInMachine<>(euro, 0))) >= 0) {
-            moneyGiven += euro.getValueForCalcul();
+        if ((index = coins.indexOf(new CoinInMachine<>(coin, 0))) >= 0) {
+            moneyGiven += coin.getValueForCalcul();
             coins.get(index).addQuantity(1);
             return null;
         } else {
-            return euro;
+            return coin;
         }
     }
 
@@ -121,6 +122,12 @@ public class VendingMachine {
     private void checkProductInMachinePrecondition(Product product) {
         if (!productInMachine.containsKey(product)) {
             throw new IllegalArgumentException("product Selected is not in the Machine");
+        }
+    }
+
+    private void checkTypeOfCoinPrecondition(Coin coin) {
+        if (!coins.isEmpty() && coins.get(0).getCoin().getTypeClass() != coin.getTypeClass()) {
+            throw new IllegalArgumentException(coin.getType() + " is not accepted by the Machine");
         }
     }
 

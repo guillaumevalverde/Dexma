@@ -2,6 +2,7 @@ package gve.dexma;
 
 import gve.dexma.pojo.Euro;
 import gve.dexma.pojo.Product;
+import gve.dexma.vendingmachine.CoinForTest;
 import gve.dexma.vendingmachine.FactoryVendingMachine;
 import gve.dexma.vendingmachine.VendingMachine;
 import org.junit.Before;
@@ -22,6 +23,16 @@ public class SupplierUsingVendingMachine extends BaseTest {
     public void addMoneyAndCancel() {
         vendingMachine.addCoinSupplierRequest(new Euro(2f), 2);
         assertEquals(12, vendingMachine.getCoin(5).getQuantity());
+    }
+
+    @Test
+    public void addTwoTypeOfMoney() {
+        vendingMachine.addCoinSupplierRequest(new Euro(2f), 2);
+        try {
+            vendingMachine.addCoinSupplierRequest(new CoinForTest(2f), 2);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test
