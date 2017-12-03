@@ -1,4 +1,4 @@
-package gve.dexma.vendingmachine;
+package gve.dexma.vendingmachine.implementation;
 
 import gve.dexma.ToolUtil;
 import gve.dexma.pojo.Coin;

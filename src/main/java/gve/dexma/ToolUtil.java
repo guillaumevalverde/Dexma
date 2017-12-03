@@ -3,7 +3,6 @@ package gve.dexma;
 import gve.dexma.pojo.Coin;
 import gve.dexma.pojo.CoinInMachine;
 import gve.dexma.pojo.Euro;
-
 import java.util.List;
 import java.util.Map;
 
